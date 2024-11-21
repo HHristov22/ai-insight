@@ -3,7 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 
 export default function handler(req, res) {
-  const dirPath = path.join(process.cwd(), '_news');
+  const dirPath = path.join(process.cwd(), 'news');
   const filenames = fs.readdirSync(dirPath);
 
   const articles = filenames.map((filename) => {
