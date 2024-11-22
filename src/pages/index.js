@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import styles from '../styles/Home.module.css';
 
 export default function Home() {
   const [articles, setArticles] = useState([]);
@@ -10,17 +12,17 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-      <h1>AI Insight</h1>
-      <ul>
+    <div className={styles.container}>
+      <h1 className={styles.siteTitle}>AI Insight</h1>
+      <div className={styles.grid}>
         {articles.map((article) => (
-          <li key={article.slug}>
-            <h2>{article.title}</h2>
+          <Link key={article.slug} href={`/news/${article.slug}`} className={styles.card}>
+            <h2 className={styles.newsTitle}>{article.title}</h2>
             <p>{article.date}</p>
             <p>{article.content.slice(0, 100)}...</p>
-          </li>
+          </Link>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,38 @@
+.container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.siteTitle {
+  font-family: 'GeistMono', monospace;
+  font-size: 3rem;
+  text-align: center;
+  color: #0070f3;
+  margin-bottom: 40px;
+}
+
+.newsTitle {
+  font-family: 'NotoSansMono', monospace;
+  font-size: 1.5rem;
+  color: #0070f3;
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
