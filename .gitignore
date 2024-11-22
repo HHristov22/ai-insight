@@ -12,6 +12,8 @@ node_modules/
 
 # Python virtual environment
 venv/
+__pycache__/
+*.pyc
 
 # Testing coverage reports
 coverage/
