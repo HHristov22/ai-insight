@@ -2,14 +2,12 @@
 This project is under active development.
 Feedback are welcome!
 ---
-AI Insight is an automated news aggregation platform focused on the latest developments in Artificial Intelligence (AI). The platform scrapes news articles from multiple trusted sources, processes the content to remove duplicates, and categorizes them based on AI-specific topics using state-of-the-art Natural Language Processing (NLP) models. 
+AI Insight is an automated news aggregation platform focused on the latest developments in Artificial Intelligence (AI). The platform scrapes news articles from multiple trusted sources, processes the content to remove duplicates, and categorizes them based on AI-specific topics. 
 
 ## Key Features
 - **Automated Scraping:** Periodically collects AI-related news from RSS feeds and websites.
-- **Content Deduplication:** Uses machine learning (TF-IDF and clustering) to identify and remove duplicate articles.
-- **Topic Classification:** Classifies articles into AI-related categories using a zero-shot classification model.
-- **Markdown Storage:** Saves each article as a Markdown file for easy access and version control.
-- **Cloud Integration:** Uses AWS Lambda for automation and AWS S3 for storing Markdown files.
+- **Markdown Storage:** Saves each news as a Markdown file for easy access.
+- **Cloud Integration:** Prepared for integration with cloud storage solutions (GitHub Action)
 - **Next.js Frontend:** Displays the aggregated news in an elegant, user-friendly interface.
 
 ## Technology Stack
@@ -27,3 +25,10 @@ AI Insight aims to become a go-to platform for keeping up with advancements in A
 - Add analytics and trends visualization for AI topics.
 
 
+### Setting Up the Project
+- npm install
+- python -m venv venv
+    - venv\Scripts\activate or source venv/bin/activate
+    - pip install -r requirements.txt
+    - python .\scripts\main.py
+- npm run dev
