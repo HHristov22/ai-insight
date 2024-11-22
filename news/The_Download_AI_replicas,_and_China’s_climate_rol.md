@@ -1,7 +1,7 @@
 ---
 title: "The Download: AI replicas, and China’s climate role"
 source: MIT Technology Review AI
-date: 21-11-24
+date: 2024-11-21
 link: https://www.technologyreview.com/2024/11/21/1107114/the-download-ai-replicas-china-climate-role/
 ---
 

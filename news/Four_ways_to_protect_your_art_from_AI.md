@@ -1,7 +1,7 @@
 ---
 title: "Four ways to protect your art from AI"
 source: MIT Technology Review AI
-date: 21-11-24
+date: 2024-11-21
 link: https://www.technologyreview.com/2024/11/21/1107108/four-ways-to-protect-your-art-from-ai/
 ---
 
