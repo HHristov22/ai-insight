@@ -10,7 +10,8 @@ class News:
         """
         Generates content for the Markdown file from the object.
         """
-        formatted_date = self.published.strftime("%d-%m-%y")
+        # formatted_date = self.published.strftime("%d-%m-%y")
+        formatted_date = self.published.strftime("%Y-%m-%d")
         return f"""---
 title: "{self.title}"
 source: {self.source}
