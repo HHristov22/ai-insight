@@ -40,7 +40,7 @@ def save_as_markdown(news):
 def delete_old_markdown_files():
     """
     Deletes Markdown files in the NEWS_DIR directory whose names start
-    with a date older than 1 month from today (YYYY_MM_DD format).
+    with a date older than 1 month from today (YYYY-MM-DD format).
     """
     if not os.path.exists(NEWS_DIR):
         print("Directory does not exist.")
@@ -51,9 +51,9 @@ def delete_old_markdown_files():
 
     for filename in os.listdir(NEWS_DIR):
         # Check if the file name starts with a date in YYYY_MM_DD format
-        if filename.endswith(".md") and filename[:10].count('_') == 2:
+        if filename.endswith(".md") and filename[:10].count('-') == 2:
             try:
-                file_date = datetime.strptime(filename[:10], "%Y_%m_%d")
+                file_date = datetime.strptime(filename[:10], "%Y-%m-%d")
                 # Check if the file date is older than 1 month
                 if file_date < one_month_ago:
                     os.remove(os.path.join(NEWS_DIR, filename))
