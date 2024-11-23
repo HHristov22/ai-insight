@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Head from 'next/head';
+import '../styles/globals.css';
 
 export default function MyApp({ Component, pageProps }) {
   const [darkMode, setDarkMode] = useState(false);

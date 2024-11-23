@@ -1,26 +1,17 @@
 @font-face {
-    font-family: 'GeistMono';
-    src: url('/fonts/GeistMonoVF.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
-  
-@font-face {
-font-family: 'Geist';
-src: url('/fonts/GeistVF.woff') format('woff');
-font-weight: normal;
-font-style: normal;
+  font-family: 'Righteous';
+  src: url('/fonts/Righteous.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-@font-face {
-    font-family: 'NotoSansMono';
-    src: url('/fonts/NotoSansMono-VariableFont_wdth,wght.ttf') format('truetype');
-    font-weight: 100 900; /* Variable font weight range */
-    font-style: normal;
-  }
-
 body {
-margin: 0;
-padding: 0;
-font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: 'Righteous';
+}
+
+a {
+  text-decoration: none; /* Премахване на подчертаването за всички линкове */
+  color: inherit; /* Унаследяване на цвета от родителя */
 }
