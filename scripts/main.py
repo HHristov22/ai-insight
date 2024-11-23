@@ -15,5 +15,5 @@ if __name__ == "__main__":
         print("No articles found.")
     
     print("Deleting old articles...")
-    delete_old_markdown_files()  # Извикване на функцията за триене
+    delete_old_markdown_files()
     print("Old articles deleted (if any were older than 1 month).")
