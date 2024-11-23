@@ -27,7 +27,7 @@ def fetch_ai_news():
     
     ai_news = []
     now = datetime.now()
-    twelve_hours_ago = now - timedelta(hours=12)
+    n_hours_ago = now - timedelta(hours=240)
 
     for source, url in rss_feeds.items():
         feed = feedparser.parse(url)
@@ -36,7 +36,7 @@ def fetch_ai_news():
             if hasattr(entry, 'published_parsed'):
                 published_time = datetime.fromtimestamp(time.mktime(entry.published_parsed))
             
-            if published_time and published_time >= twelve_hours_ago:
+            if published_time and published_time >= n_hours_ago:
                 if any(keyword in entry.title.lower() for keyword in ai_keywords) or ('AI' in entry.title):
                     content = extract_article_content(entry.link)
                     if content:
