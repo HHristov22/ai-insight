@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Typography } from '@mui/material';
-import Header from '../../components/Header';
+import Layout from '../../components/layout/Layout';
 
 export async function getStaticPaths() {
   const fs = require('fs');
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false, // Страницата се генерира само ако slug съществува
+    fallback: false,
   };
 }
 
@@ -23,51 +23,60 @@ export async function getStaticProps({ params }) {
   const path = require('path');
   const matter = require('gray-matter');
 
-  // Четене на Markdown файл
   const filePath = path.join(process.cwd(), 'news', `${params.slug}.md`);
   const fileContent = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContent);
 
-  // Форматиране на датата в текстов низ
-  const formattedDate = data.date
-    ? new Date(data.date).toISOString() // ISO 8601 формат
-    : null;
+  // Конвертираме Date обекта в ISO string
+  const date = data.date ? new Date(data.date).toISOString() : null;
 
   return {
     props: {
       title: data.title || 'Untitled',
-      date: formattedDate, // Преобразувана дата
-      content: content ? content.split('\n') : [], // Съдържание, разделено на редове
+      date: date, // използваме конвертирания ISO string
+      formattedDate: date 
+        ? new Date(date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }) 
+        : 'Unknown Date',
+      content: content ? content.split('\n') : [],
     },
   };
 }
 
-export default function NewsPage({ title, date, content, darkMode, toggleDarkMode }) {
-  // Форматиране на дата за показване
-  const formattedDate = date
-    ? new Date(date).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      })
-    : 'Unknown Date';
-
+export default function NewsPage({ 
+  title, 
+  formattedDate, 
+  content, 
+  darkMode, 
+  toggleDarkMode 
+}) {
   return (
-    <>
-      <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} isNewsPage={true} />
-      <Container maxWidth="md" style={{ marginTop: '20px' }}>
+    <Layout darkMode={darkMode} toggleDarkMode={toggleDarkMode}>
+      <Container maxWidth="md" sx={{ my: 4 }}>
         <Typography variant="h4" component="h1" gutterBottom>
           {title}
         </Typography>
-        <Typography variant="subtitle1" color="textSecondary" gutterBottom>
+        <Typography 
+          variant="subtitle1" 
+          color="text.secondary" 
+          gutterBottom
+        >
           {formattedDate}
         </Typography>
         {content.map((paragraph, index) => (
-          <Typography key={index} variant="body1" paragraph style={{ textAlign: 'justify' }}>
+          <Typography 
+            key={index} 
+            variant="body1" 
+            paragraph 
+            sx={{ textAlign: 'justify' }}
+          >
             {paragraph.trim()}
           </Typography>
         ))}
       </Container>
-    </>
+    </Layout>
   );
 }

@@ -1,117 +1,62 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Grid, Typography, Card, CardContent, CardActions, IconButton } from '@mui/material';
-import { ArrowForward } from '@mui/icons-material';
-import Header from '../components/Header';
-import Link from 'next/link';
+import { Container, Typography } from '@mui/material';
+import Header from '../components/layout/Header';
+import Hero from '../components/home/Hero';
+import NewsGrid from '../components/home/NewsGrid';
+import Layout from '../components/layout/Layout';
 
 export default function Home({ darkMode, toggleDarkMode }) {
-  const [articles, setArticles] = useState([]); // Празен масив по подразбиране
-  const [error, setError] = useState(null); // Добавяме обработка на грешки
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('/api/articles')
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Failed to fetch articles');
+    const fetchArticles = async () => {
+      try {
+        const response = await fetch('/api/articles');
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to fetch articles');
         }
-        return res.json();
-      })
-      .then((data) => {
+        
+        const data = await response.json();
+        
         const formattedData = data.map((article) => ({
           ...article,
           formattedDate: article.date
             ? new Date(article.date).toLocaleDateString()
             : 'Unknown Date',
         }));
+        
         setArticles(formattedData);
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error('Error fetching articles:', err);
         setError(err.message);
-      });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArticles();
   }, []);
 
-  if (error) {
-    return (
-      <Container>
-        <Typography variant="h6" color="error">
-          {`Error: ${error}`}
-        </Typography>
-      </Container>
-    );
-  }
-
   return (
-    <>
-      <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} isNewsPage={false} />
-      <Container maxWidth="lg" style={{ marginTop: '20px' }}>
-        <Grid container spacing={3}>
-          {articles.length > 0 ? (
-            articles.map((article) => (
-              <Grid item xs={12} sm={6} md={4} key={article.slug}>
-                <Card
-                  style={{
-                    height: '300px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    transition: 'transform 0.2s, box-shadow 0.2s',
-                  }}
-                  sx={{
-                    '&:hover': {
-                      transform: 'scale(1.03)',
-                      boxShadow: '0 6px 12px rgba(0,0,0,0.2)',
-                    },
-                  }}
-                >
-                  <CardContent>
-                    <Typography
-                      variant="h5"
-                      component="h2"
-                      style={{
-                        display: '-webkit-box',
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                      }}
-                    >
-                      {article.title}
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" gutterBottom>
-                      {article.formattedDate}
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      style={{
-                        display: '-webkit-box',
-                        WebkitLineClamp: 4,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        opacity: 0.3, // Прозрачен текст
-                      }}
-                    >
-                      {article.content}
-                    </Typography>
-                  </CardContent>
-                  <CardActions style={{ justifyContent: 'flex-end' }}>
-                    <Link href={`/news/${article.slug}`} passHref>
-                      <IconButton color="primary">
-                        <ArrowForward />
-                      </IconButton>
-                    </Link>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))
-          ) : (
-            <Typography variant="body1" color="textSecondary">
-              No articles available.
-            </Typography>
-          )}
-        </Grid>
+    <Layout darkMode={darkMode} toggleDarkMode={toggleDarkMode}>
+      <Hero />
+      <Container maxWidth="lg" sx={{ my: 8 }}>
+        {loading ? (
+          <Typography variant="h6" align="center">
+            Loading articles...
+          </Typography>
+        ) : error ? (
+          <Typography variant="h6" color="error" align="center" sx={{ my: 4 }}>
+            {error}
+          </Typography>
+        ) : (
+          <NewsGrid articles={articles} />
+        )}
       </Container>
-    </>
+    </Layout>
   );
 }

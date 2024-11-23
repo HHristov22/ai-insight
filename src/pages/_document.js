@@ -5,8 +5,8 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <meta charSet="UTF-8" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/assets/images/favicon.ico" />
+        <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <body>

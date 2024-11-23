@@ -33,7 +33,7 @@ export default function MyApp({ Component, pageProps }) {
           {`
             @font-face {
               font-family: 'Righteous';
-              src: url('/fonts/Righteous.ttf') format('truetype');
+              src: url('/assets/fonts/Righteous.ttf') format('truetype');
             }
           `}
         </style>
