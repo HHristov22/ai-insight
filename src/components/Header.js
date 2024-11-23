@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function Header({ darkMode, toggleDarkMode }) {
   return (
-    <AppBar position="sticky" color="primary" sx={{ backgroundColor: '#1976d2' }}>
+    <AppBar position="sticky" color="primary" sx={{ backgroundColor: '#106EBE' }}>
       <Toolbar
         sx={{
           display: 'flex',
@@ -14,18 +14,17 @@ export default function Header({ darkMode, toggleDarkMode }) {
         }}
       >
 
-        {/* Централен текст */}
-        <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
+        <Box sx={{ flexGrow: 1 }}>
           <Link href="/" passHref>
             <Typography
               variant="h6"
               sx={{
-                fontFamily: 'Righteous', // Използване на персонализирания шрифт
-                fontSize: '24px',
+                fontFamily: 'Righteous',
+                fontSize: '42px',
                 color: 'white',
                 textDecoration: 'none',
-                display: 'inline-block',
-                textAlign: 'center',
+                // display: 'inline-block',
+                // textAlign: 'center',
               }}
             >
               AI-INSIGHT
@@ -33,7 +32,6 @@ export default function Header({ darkMode, toggleDarkMode }) {
           </Link>
         </Box>
 
-        {/* Бутон за смяна на тема */}
         <IconButton color="inherit" onClick={toggleDarkMode} sx={{ marginLeft: 'auto' }}>
           {darkMode ? <LightMode /> : <DarkMode />}
         </IconButton>

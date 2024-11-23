@@ -22,8 +22,6 @@ export default function MyApp({ Component, pageProps }) {
   const theme = createTheme({
     palette: {
       mode: darkMode ? 'dark' : 'light',
-      primary: { main: '#1976d2' },
-      secondary: { main: '#f50057' },
     },
   });
 

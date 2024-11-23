@@ -25,7 +25,8 @@ export default function handler(req, res) {
       ...data,
       content,
     };
-  });
+  })
+  .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   // Връщане на новините като JSON
   res.status(200).json(articles);
