@@ -55,7 +55,7 @@ export default function NewsPage({
   return (
     <Layout darkMode={darkMode} toggleDarkMode={toggleDarkMode}>
       <Container maxWidth="md" sx={{ my: 4 }}>
-        <Typography variant="h3" component="h1" gutterBottom>
+        <Typography variant="h3" component="h1" gutterBottom style={{ textAlign: 'justify' }}>
           {title}
         </Typography>
         <Typography 
