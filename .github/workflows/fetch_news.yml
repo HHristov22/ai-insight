@@ -27,7 +27,7 @@ jobs:
 
     - name: Commit and push changes
       run: |
-        git add content/*.md
+        git add news/*.md
         git commit -m "Add new news updates" || echo "No changes to commit"
         git push
 
