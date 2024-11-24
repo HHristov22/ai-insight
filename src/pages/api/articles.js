@@ -16,13 +16,12 @@ export default function handler(req, res) {
     const fileContent = fs.readFileSync(filePath, 'utf8');
     const { data, content } = matter(fileContent);
 
-    // Конвертираме Date обекта в ISO string
     const date = data.date ? new Date(data.date).toISOString() : null;
 
     return {
       slug: filename.replace('.md', ''),
       ...data,
-      date, // използваме конвертирания ISO string
+      date,
       content,
       formattedDate: date 
         ? new Date(date).toLocaleDateString('en-US', {
@@ -34,10 +33,9 @@ export default function handler(req, res) {
     };
   });
 
-  // Сортираме използвайки ISO string датите
   const sortedArticles = articles.sort((a, b) => 
     new Date(b.date) - new Date(a.date)
-  );
+  ).slice(0, 3);
 
   res.status(200).json(sortedArticles);
 }

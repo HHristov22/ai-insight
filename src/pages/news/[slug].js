@@ -27,13 +27,12 @@ export async function getStaticProps({ params }) {
   const fileContent = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContent);
 
-  // Конвертираме Date обекта в ISO string
   const date = data.date ? new Date(data.date).toISOString() : null;
 
   return {
     props: {
       title: data.title || 'Untitled',
-      date: date, // използваме конвертирания ISO string
+      date: date,
       formattedDate: date 
         ? new Date(date).toLocaleDateString('en-US', {
             year: 'numeric',
@@ -56,7 +55,7 @@ export default function NewsPage({
   return (
     <Layout darkMode={darkMode} toggleDarkMode={toggleDarkMode}>
       <Container maxWidth="md" sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
+        <Typography variant="h3" component="h1" gutterBottom>
           {title}
         </Typography>
         <Typography 

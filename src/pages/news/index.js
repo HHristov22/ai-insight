@@ -7,9 +7,10 @@ export default function NewsPage({ articles, darkMode, toggleDarkMode }) {
   return (
     <Layout darkMode={darkMode} toggleDarkMode={toggleDarkMode}>
       <Container maxWidth="lg" sx={{ my: 4 }}>
-        <Typography variant="h3" component="h1" sx={{ mb: 4 }}>
+        <Typography variant="h3" component="h1" sx={{ mb: 2, fontWeight: 'bold', color: 'primary.main' }}>
           Latest AI News
         </Typography>
+
         <NewsGrid articles={articles} />
       </Container>
     </Layout>
@@ -29,13 +30,12 @@ export async function getStaticProps() {
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const { data, content } = matter(fileContents);
 
-    // Конвертираме Date обекта в ISO string
     const date = data.date ? new Date(data.date).toISOString() : null;
     
     return {
       slug: filename.replace('.md', ''),
       ...data,
-      date, // използваме конвертирания ISO string
+      date,
       content,
       formattedDate: date 
         ? new Date(date).toLocaleDateString('en-US', {
@@ -47,10 +47,8 @@ export async function getStaticProps() {
     };
   });
 
-  // Сортираме използвайки ISO string датите
   const sortedArticles = articles.sort((a, b) => 
-    new Date(b.date) - new Date(a.date)
-  );
+    new Date(b.date) - new Date(a.date)); //.slice(0, 3);
 
   return {
     props: {

@@ -25,7 +25,11 @@ export default function Home({ darkMode, toggleDarkMode }) {
         const formattedData = data.map((article) => ({
           ...article,
           formattedDate: article.date
-            ? new Date(article.date).toLocaleDateString()
+            ? new Date(article.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })
             : 'Unknown Date',
         }));
         
@@ -45,6 +49,9 @@ export default function Home({ darkMode, toggleDarkMode }) {
     <Layout darkMode={darkMode} toggleDarkMode={toggleDarkMode}>
       <Hero />
       <Container maxWidth="lg" sx={{ my: 8 }}>
+      <Typography variant="h4" align="center" sx={{ my: 4 }}>
+          The Latest Highlights from the AI World
+        </Typography>
         {loading ? (
           <Typography variant="h6" align="center">
             Loading articles...
