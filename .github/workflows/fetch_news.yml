@@ -1,0 +1,33 @@
+name: Fetch News
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'
+  workflow_dispatch:
+
+jobs:
+  fetch-news:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run scraping script
+      run: python scripts/main.py
+
+    - name: Commit and push changes
+      run: |
+        git add content/*.md
+        git commit -m "Add new news updates" || echo "No changes to commit"
+        git push
+
