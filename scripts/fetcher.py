@@ -48,11 +48,12 @@ def fetch_ai_news():
                 if any(keyword in entry.title.lower() for keyword in ai_keywords) or ('AI' in entry.title):
                     content= extract_article_content(entry.link)
                     if content:
-                        ai_news.append(News(
-                            title=entry.title,
-                            content=content,
-                            link=entry.link,
-                            source=source,
-                            published=published_time
-                        ))
+                        if len(content)>1500:
+                            ai_news.append(News(
+                                title=entry.title,
+                                content=content,
+                                link=entry.link,
+                                source=source,
+                                published=published_time
+                            ))
     return ai_news
