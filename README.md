@@ -10,11 +10,11 @@ AI Insight is an automated news aggregation platform focused on the latest devel
 - **Cloud Integration:** Prepared for integration with cloud storage solutions (GitHub Action)
 - **Next.js Frontend:** Displays the aggregated news in an elegant, user-friendly interface.
 
-## Technology Stack
+<!-- ## Technology Stack
 - **Backend:** Python with libraries like `feedparser`, `newspaper3k`, `scikit-learn`, and `transformers`.
 - **Cloud:** AWS Lambda for serverless automation and AWS S3 for storage.
 - **Frontend:** Next.js for rendering and presenting news articles.
-- **AI Models:** Hugging Face's `facebook/bart-large-mnli` for topic classification.
+- **AI Models:** Hugging Face's `facebook/bart-large-mnli` for topic classification. -->
 
 ## Vision
 AI Insight aims to become a go-to platform for keeping up with advancements in AI, consolidating scattered information into one accessible and streamlined platform.
@@ -25,10 +25,10 @@ AI Insight aims to become a go-to platform for keeping up with advancements in A
 - Add analytics and trends visualization for AI topics.
 
 
-### Setting Up the Project
+<!-- ### Setting Up the Project
 - npm install
 - python -m venv venv
     - venv\Scripts\activate or source venv/bin/activate
     - pip install -r requirements.txt
     - python .\scripts\main.py
-- npm run dev
+- npm run dev -->
