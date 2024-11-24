@@ -3,6 +3,7 @@ import time
 from datetime import datetime, timedelta
 from utils import extract_article_content
 from news import News
+import json
 
 rss_feeds = {
     'BBC Technology': 'http://feeds.bbci.co.uk/news/technology/rss.xml',
@@ -11,6 +12,12 @@ rss_feeds = {
     'Wired AI': 'https://www.wired.com/feed/category/ai/latest/rss',
     'TechCrunch AI': 'http://feeds.feedburner.com/Techcrunch'
 }
+
+def load_rss_feeds(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        rss_feeds = json.load(file)
+    return rss_feeds
+ 
 
 def fetch_ai_news():
     """
@@ -26,19 +33,20 @@ def fetch_ai_news():
     ]
     
     ai_news = []
+    rss_feeds = load_rss_feeds('./scripts/rss_feeds.json')
     now = datetime.now()
-    n_hours_ago = now - timedelta(hours=240)
+    n_hours_ago = now - timedelta(hours=24)
 
     for source, url in rss_feeds.items():
         feed = feedparser.parse(url)
         for entry in feed.entries:
             published_time = None
-            if hasattr(entry, 'published_parsed'):
+            if hasattr(entry, 'published_parsed') and entry.published_parsed:
                 published_time = datetime.fromtimestamp(time.mktime(entry.published_parsed))
             
             if published_time and published_time >= n_hours_ago:
                 if any(keyword in entry.title.lower() for keyword in ai_keywords) or ('AI' in entry.title):
-                    content = extract_article_content(entry.link)
+                    content= extract_article_content(entry.link)
                     if content:
                         ai_news.append(News(
                             title=entry.title,
