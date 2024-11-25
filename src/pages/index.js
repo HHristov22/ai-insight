@@ -50,7 +50,8 @@ export default function Home({ darkMode, toggleDarkMode }) {
       <Hero />
       <Container maxWidth="lg" sx={{ my: 8 }}>
       <Typography variant="h4" align="center" sx={{ my: 4 }}>
-          The Latest Highlights from the AI World
+          {/* The Latest Highlights from the AI World */}
+          Discover What’s Next in AI Today
         </Typography>
         {loading ? (
           <Typography variant="h6" align="center">
