@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Typography } from '@mui/material';
-import Header from '../components/layout/Header';
+// import Header from '../components/layout/Header';
 import Hero from '../components/home/Hero';
 import NewsGrid from '../components/home/NewsGrid';
 import Layout from '../components/layout/Layout';

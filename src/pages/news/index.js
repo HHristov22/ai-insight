@@ -2,6 +2,9 @@ import React from 'react';
 import { Container, Typography } from '@mui/material';
 import Layout from '../../components/layout/Layout';
 import NewsGrid from '../../components/home/NewsGrid';
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
 
 export default function NewsPage({ articles, darkMode, toggleDarkMode }) {
   return (
@@ -18,10 +21,6 @@ export default function NewsPage({ articles, darkMode, toggleDarkMode }) {
 }
 
 export async function getStaticProps() {
-  const fs = require('fs');
-  const path = require('path');
-  const matter = require('gray-matter');
-
   const newsDirectory = path.join(process.cwd(), 'news');
   const filenames = fs.readdirSync(newsDirectory);
 

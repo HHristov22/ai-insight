@@ -1,10 +1,11 @@
 import React from 'react';
 import { Container, Typography } from '@mui/material';
 import Layout from '../../components/layout/Layout';
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
 
 export async function getStaticPaths() {
-  const fs = require('fs');
-  const path = require('path');
   const dirPath = path.join(process.cwd(), 'news');
   const filenames = fs.readdirSync(dirPath);
 
@@ -19,10 +20,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const fs = require('fs');
-  const path = require('path');
-  const matter = require('gray-matter');
-
   const filePath = path.join(process.cwd(), 'news', `${params.slug}.md`);
   const fileContent = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContent);
