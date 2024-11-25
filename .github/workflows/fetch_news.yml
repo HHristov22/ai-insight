@@ -1,5 +1,4 @@
 name: Fetch News
-
 on:
   schedule:
     - cron: '0 */12 * * *'
@@ -8,26 +7,34 @@ on:
 jobs:
   fetch-news:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
+    
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-
+      
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.9'
-
+        
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-
+        
     - name: Run scraping script
       run: python scripts/main.py
-
+      
+    - name: Configure Git
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        
     - name: Commit and push changes
       run: |
         git add news/*.md
         git commit -m "Add new news updates" || echo "No changes to commit"
         git push
-
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
